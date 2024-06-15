@@ -53,8 +53,7 @@ const baseUrl = location.origin;
 
 <style scoped lang="less">
 .goods-card {
-  min-width: 170px;
-  max-width: 170px;
+  width: calc(50% - 5px);
   background: #ffffff;
   padding: 9px;
   box-sizing: border-box;

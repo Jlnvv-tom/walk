@@ -1,38 +1,43 @@
 <template>
   <div class="message-info">
-    <div class="message-info__tab">
-      <div
-        class="message-info__tab-pane"
-        :class="{ 'is-active-tab': activeKey === 'announcement' }"
-        @click="() => (activeKey = 'announcement')"
-      >
-        活动公告
-      </div>
-      <div
-        class="message-info__tab-pane"
-        :class="{ 'is-active-tab': activeKey === 'order' }"
-        @click="() => (activeKey = 'order')"
-      >
-        订单消息
+    <div class="message-info__scroll" ref="messageWrapperScroll">
+      <div class="message-info__scroll-content">
+        <div class="message-info__tab">
+          <div
+            class="message-info__tab-pane"
+            :class="{ 'is-active-tab': activeKey === 'announcement' }"
+            @click="() => (activeKey = 'announcement')"
+          >
+            活动公告
+          </div>
+          <div
+            class="message-info__tab-pane"
+            :class="{ 'is-active-tab': activeKey === 'order' }"
+            @click="() => (activeKey = 'order')"
+          >
+            订单消息
+            <div v-show="activeKey === 'announcement'" class="un-read"></div>
+          </div>
+        </div>
+        <div class="message-info__header-action">
+          <div @click="showDeleteModal = true">
+            <img src="./img/delete.png" width="12" height="12" />
+            <span style="margin-left: 2px">删除已读</span>
+          </div>
+          <div style="margin: 0 15px">|</div>
+          <div @click="showIsReadModal = true">
+            <img src="./img/clear.png" width="12" height="12" />
+            <span style="margin-left: 2px">一键已读</span>
+          </div>
+        </div>
+        <ListContent
+          :messageListData="messageListData"
+          :messageType="activeKey"
+          :isDeleteRead="isDeleteRead"
+          :isAllRead="isAllRead"
+        />
       </div>
     </div>
-    <div class="message-info__header-action">
-      <div @click="showDeleteModal = true">
-        <img src="./img/delete.png" width="12" height="12" />
-        <span style="margin-left: 2px">删除已读</span>
-      </div>
-      <div style="margin: 0 15px">|</div>
-      <div @click="showIsReadModal = true">
-        <img src="./img/clear.png" width="12" height="12" />
-        <span style="margin-left: 2px">一键已读</span>
-      </div>
-    </div>
-    <ListContent
-      :messageListData="messageListData"
-      :messageType="activeKey"
-      :isDeleteRead="isDeleteRead"
-      :isAllRead="isAllRead"
-    />
 
     <ConfirmModal
       v-if="showDeleteModal"
@@ -54,14 +59,44 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import {
+  ref,
+  computed,
+  reactive,
+  onMounted,
+  onBeforeUnmount,
+  nextTick,
+} from "vue";
 import ListContent from "./list-content.vue";
 import ConfirmModal from "./confirm-modal.vue";
 import {
   messageAnnouncementListData,
   messageOrderListData,
 } from "../server.ts";
+import BScroll from "@better-scroll/core";
 
+const messageWrapperScroll = ref(null);
+let bs = reactive({});
+
+const init = () => {
+  bs = new BScroll(messageWrapperScroll.value, {
+    scrollY: true, //沿Y轴滚动
+    scrollX: true, //沿X轴滚动
+    click: true, //派发点击事件
+    probeType: 3, //反向偏移量
+    eventPassthrough: "horizontal",
+  });
+};
+
+onMounted(() => {
+  setTimeout(() => {
+    nextTick(() => init());
+  }, 1000);
+});
+
+onBeforeUnmount(() => {
+  bs.destroy();
+});
 const activeKey = ref("announcement");
 const showDeleteModal = ref(false); // 删除提示
 const showIsReadModal = ref(false);
@@ -92,6 +127,10 @@ const confirmIsRead = () => {
   align-items: center;
 }
 .message-info {
+  &__scroll {
+    overflow: hidden;
+    height: 800px;
+  }
   &__tab {
     .flex-align-center;
     font-size: 16px;
@@ -100,6 +139,16 @@ const confirmIsRead = () => {
     padding-left: 15px;
     &-pane {
       margin-right: 25px;
+      position: relative;
+      .un-read {
+        width: 8px;
+        height: 8px;
+        background: #ff876a;
+        position: absolute;
+        border-radius: 100%;
+        top: -2px;
+        right: -8px;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -109,7 +158,7 @@ const confirmIsRead = () => {
       font-size: 20px;
       color: #333333;
       line-height: 20px;
-      position: relative;
+
       &::after {
         content: "";
         display: block;

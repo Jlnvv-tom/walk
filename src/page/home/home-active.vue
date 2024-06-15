@@ -1,10 +1,10 @@
 <template>
   <div class="home-top">
-    <img
-      class="message"
-      src="./img/message@3x.png"
-      @click="$router.push('/message')"
-    />
+    <div class="message" @click="$router.push('/message')">
+      <img src="./img/message@3x.png" />
+      <div class="message-tip">2</div>
+    </div>
+
     <img class="rule" src="./img/rule@3x.png" />
     <div class="coins" @click="$router.push('/shopping-center')">
       <img src="./img/coins@3x.png" />
@@ -47,6 +47,10 @@
 </template>
 
 <style scoped lang="less">
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
 .home-top {
   background: url("./img/bg@3x.png");
   width: 100%;
@@ -58,8 +62,25 @@
     position: absolute;
     top: 15px;
     left: 10px;
-    width: 28px;
-    height: 36px;
+    img {
+      width: 28px;
+      height: 36px;
+    }
+    &-tip {
+      width: 12px;
+      height: 12px;
+      background: #ff876a;
+      border: 1px solid #ffffff;
+      position: absolute;
+      border-radius: 100%;
+      top: -6px;
+      right: -6px;
+      font-size: 8px;
+      color: #ffffff;
+      line-height: 8px;
+      .flex-align-center;
+      justify-content: center;
+    }
   }
   .rule {
     position: absolute;
@@ -78,8 +99,7 @@
     background: #ffffff;
     border-radius: 13px 0px 0px 13px;
     background-color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: center;
+    .flex-align-center;
     &-value {
       font-size: 16px;
       color: #027c64;
@@ -180,8 +200,7 @@
     color: #ffffff;
     font-family: PingFangSC, PingFang SC;
     font-weight: 500;
-    display: flex;
-    align-items: center;
+    .flex-align-center;
     justify-content: center;
   }
 }

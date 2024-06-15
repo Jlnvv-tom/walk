@@ -178,7 +178,7 @@ const confirmDelete = (item) => {
       .reading-status {
         width: 8px;
         height: 8px;
-        background: rgba(255, 97, 28, 1);
+        background: #ff876a;
         border-radius: 100%;
         top: -4px;
         right: -4px;

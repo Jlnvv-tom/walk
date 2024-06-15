@@ -2,7 +2,7 @@
   <LayoutCard title="租物推荐">
     <div class="goods-list">
       <GoodsCard
-        v-for="(item, index) in goodsListData"
+        v-for="(item, index) in localGoodsListData"
         :key="index"
         v-bind="item"
       ></GoodsCard>
@@ -11,18 +11,14 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import LayoutCard from "../../components/layout-card.vue";
 import GoodsCard from "../../components/goods-card.vue";
-import { goodsListData } from "../server.ts";
-let clientHeight = document.documentElement.clientHeight; //浏览器高度
-let scrollHeight = document.body.scrollHeight;
-let scrollTop = document.documentElement.scrollTop;
+import { GoodsList } from "../server.ts";
 
-let distance = 50; //距离视窗还用50的时候，开始触发；
+const props = defineProps<{ goodsListData: GoodsList[] }>();
 
-if (scrollTop + clientHeight >= scrollHeight - distance) {
-  console.log("开始加载数据");
-}
+const localGoodsListData = computed(() => props.goodsListData);
 </script>
 
 <style scoped lang="less">
@@ -30,6 +26,6 @@ if (scrollTop + clientHeight >= scrollHeight - distance) {
   padding: 0 12px;
   display: flex;
   flex-wrap: wrap;
-  gap: 11px;
+  gap: 10px;
 }
 </style>

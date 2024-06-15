@@ -91,12 +91,12 @@ const rentCoinFormMoneyData: RentCoinFormMoney[] = [
   {
     title: "租币商城",
     description: "租币当钱花",
-    imgUrl: "/src/page/home/img/rent1.png",
+    imgUrl: "/src/page/home/img/rent2.png",
   },
   {
     title: "租币任务",
     description: "租币赚不停",
-    imgUrl: "/src/page/home/img/rent1.png",
+    imgUrl: "/src/page/home/img/rent3.png",
   },
   {
     title: "租币赢现金",
@@ -106,7 +106,7 @@ const rentCoinFormMoneyData: RentCoinFormMoney[] = [
   {
     title: "租币商城",
     description: "租币当钱花",
-    imgUrl: "/src/page/home/img/rent1.png",
+    imgUrl: "/src/page/home/img/rent2.png",
   },
 ];
 
