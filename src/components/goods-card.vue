@@ -32,14 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { TagsType } from "../page/server.ts";
-const props = withDefaults(
+withDefaults(
   defineProps<{
     imgUrl: string; // 商品图片地址
     title: string; // 商品标题
     price: string; // 价格
-    minLeaseTerm: string | number; // 最短起租时间
+    minLeaseTerm: number; // 最短起租时间
     isShippingIncluded?: boolean; // 是否包邮
     tags: TagsType[];
   }>(),

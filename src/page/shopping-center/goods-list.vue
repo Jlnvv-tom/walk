@@ -30,7 +30,12 @@
         <GoodsCard
           v-for="(item, index) in shoppingGoodsListData"
           :key="index"
-          v-bind="item"
+          :imgUrl="item.imgUrl"
+          :title="item.title"
+          :price="item.price"
+          :minLeaseTerm="item.minLeaseTerm"
+          :isShippingIncluded="item.isShippingIncluded"
+          :tags="item.tags || []"
         >
           <template #bottomRow1>
             <div class="goods-list__content-rentcoin">
@@ -50,19 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import LayoutCard from "../../components/layout-card.vue";
 import GoodsCard from "../../components/goods-card.vue";
-import { shoppingGoodsListData, GoodsList } from "../server.ts";
+import { shoppingGoodsListData } from "../server.ts";
 
 const activeTag = ref(0);
 
-watch(
-  () => activeTag,
-  (v) => {
-    console.log(v, localGoodsListData);
-  }
-);
 const numberTagsData = ref<string[]>([
   "全部",
   "1-100",
@@ -103,7 +102,7 @@ const numberTagsData = ref<string[]>([
     padding: 0 12px;
     display: flex;
     flex-wrap: wrap;
-    gap: 11px;
+    gap: 10px;
     &-rentcoin {
       background: #ffffff;
       border-radius: 5px;

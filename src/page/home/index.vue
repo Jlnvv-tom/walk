@@ -15,25 +15,31 @@ import { ref, nextTick, reactive, onMounted, onBeforeUnmount } from "vue";
 import RentRecommandList from "./rent-recommand-list.vue";
 import RentActive from "./rent-active.vue";
 import HomeActive from "./home-active.vue";
-import BScroll from "@better-scroll/core";
+import BScroll, { BScrollInstance } from "@better-scroll/core";
 import { goodsListData } from "../server.ts";
 
-const homeWrapperScroll = ref(null);
-let bs = reactive({});
+const homeWrapperScroll = ref<HTMLElement | null>(null);
+// @ts-ignore
+let bs = reactive<BScrollInstance>({});
 const localGoodsListData = ref(goodsListData);
 
 const init = () => {
-  bs = new BScroll(homeWrapperScroll.value, {
-    scrollY: true, //沿Y轴滚动
-    scrollX: true, //沿X轴滚动
-    click: true, //派发点击事件
-    probeType: 3, //反向偏移量
-    eventPassthrough: "horizontal",
-  });
+  if (homeWrapperScroll.value) {
+    bs = new BScroll(homeWrapperScroll.value, {
+      scrollY: true, //沿Y轴滚动
+      scrollX: true, //沿X轴滚动
+      click: true, //派发点击事件
+      probeType: 3, //反向偏移量
+      eventPassthrough: "horizontal",
+    });
 
-  bs.on("scrollEnd", (pos) => {
-    localGoodsListData.value = [...localGoodsListData.value, ...goodsListData];
-  });
+    bs.on("scrollEnd", () => {
+      localGoodsListData.value = [
+        ...localGoodsListData.value,
+        ...goodsListData,
+      ];
+    });
+  }
 };
 
 onMounted(() => {

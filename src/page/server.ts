@@ -15,7 +15,7 @@ export interface GoodsList {
   price: string; // 价格
   originalPrice?: number | string; // 商品原价
   rentCoin?: number | string; // 租币
-  minLeaseTerm?: number | string; // 最小租赁时间
+  minLeaseTerm: number; // 最小租赁时间
   convertibleNumber?: number | string; // 已兑换数量
   tags?: TagsType[]; // 标签数组
   isShippingIncluded?: boolean; // 是否包邮
@@ -33,12 +33,12 @@ export interface RentCoinFormMoney {
 export interface MessageList {
   id: string; // 消息id
   title: string; // 消息标题
-  isRead: boolean; // 已读状态
+  isRead?: boolean; // 已读状态
   messageTime: string; // 消息时间
   description: string; // 消息描述
-  isDelete: boolean; // 模拟删除数据
-  subTitle: string; // 子标题
-  subDescription: string; // 子描述
+  isDelete?: boolean; // 模拟删除数据
+  subTitle?: string; // 子标题
+  subDescription?: string; // 子描述
   messageType?: string; // announcement | order     公告消息或订单消息
 }
 

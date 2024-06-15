@@ -62,7 +62,13 @@ const props = defineProps<{
 
 const computedMessageListData = computed(() => props.messageListData);
 const localMessageListData = ref(computedMessageListData);
-const currentDetailData = ref<MessageList>({}); // 当前点击的详情数据
+const currentDetailData = ref<MessageList>({
+  id: "",
+  title: "",
+  description: "",
+  messageTime: "",
+}); // 当前点击的详情数据
+
 const showDetail = ref(false);
 const showCoinTip = ref(false);
 
@@ -76,7 +82,7 @@ const getMessageIcon = computed(() => {
 
 watch(
   () => props.isDeleteRead,
-  (v) => {
+  () => {
     localMessageListData.value.forEach((i) => {
       if (i.isRead) {
         i.isDelete = true;
@@ -87,7 +93,7 @@ watch(
 
 watch(
   () => props.isAllRead,
-  (v) => {
+  () => {
     localMessageListData.value.forEach((i) => {
       i.isRead = true;
     });
@@ -98,7 +104,6 @@ watch(
  * 根据idDelete 属性 模拟数组非空判断
  */
 const isEmpty = computed(() => {
-  console.log("localMessageListData.value====>", localMessageListData.value);
   if (
     localMessageListData.value.length < 1 &&
     localMessageListData.value.every((i) => i.isDelete === true)
@@ -112,7 +117,7 @@ const isEmpty = computed(() => {
 /**
  * 获取详情数据，打开详情窗口
  */
-const getDetail = (item) => {
+const getDetail = (item: MessageList) => {
   showDetail.value = true;
   currentDetailData.value = item;
 };
@@ -120,8 +125,8 @@ const getDetail = (item) => {
 /**
  * 详情确认
  */
-const confirmRead = (item) => {
-  localMessageListData.value.find((i) => {
+const confirmRead = (item: MessageList) => {
+  localMessageListData.value.find((i: MessageList) => {
     if (i.id === item.id) {
       i.isRead = true;
     }
@@ -136,7 +141,7 @@ const confirmRead = (item) => {
 /**
  * 确认删除
  */
-const confirmDelete = (item) => {
+const confirmDelete = (item: MessageList) => {
   localMessageListData.value.find((i) => {
     if (i.id === item.id) {
       i.isDelete = true;

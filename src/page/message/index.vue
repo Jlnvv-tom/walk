@@ -59,14 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  computed,
-  reactive,
-  onMounted,
-  onBeforeUnmount,
-  nextTick,
-} from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import ListContent from "./list-content.vue";
 import ConfirmModal from "./confirm-modal.vue";
 import {
@@ -75,17 +68,19 @@ import {
 } from "../server.ts";
 import BScroll from "@better-scroll/core";
 
-const messageWrapperScroll = ref(null);
-let bs = reactive({});
+const messageWrapperScroll = ref<HTMLElement | null>(null);
+// let bs = reactive({});
 
 const init = () => {
-  bs = new BScroll(messageWrapperScroll.value, {
-    scrollY: true, //沿Y轴滚动
-    scrollX: true, //沿X轴滚动
-    click: true, //派发点击事件
-    probeType: 3, //反向偏移量
-    eventPassthrough: "horizontal",
-  });
+  if (messageWrapperScroll.value) {
+    new BScroll(messageWrapperScroll.value, {
+      scrollY: true, //沿Y轴滚动
+      scrollX: true, //沿X轴滚动
+      click: true, //派发点击事件
+      probeType: 3, //反向偏移量
+      eventPassthrough: "horizontal",
+    });
+  }
 };
 
 onMounted(() => {
@@ -95,12 +90,11 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  bs.destroy();
+  // bs.destroy();
 });
 const activeKey = ref("announcement");
 const showDeleteModal = ref(false); // 删除提示
 const showIsReadModal = ref(false);
-const showDetailModal = ref(false); // 显示详情
 const isDeleteRead = ref(false); // 是否删除已读状态的数据
 const isAllRead = ref(false); // 是否删除已读状态的数据
 

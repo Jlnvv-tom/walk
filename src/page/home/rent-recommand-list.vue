@@ -4,7 +4,12 @@
       <GoodsCard
         v-for="(item, index) in localGoodsListData"
         :key="index"
-        v-bind="item"
+        :imgUrl="item.imgUrl"
+        :title="item.title"
+        :price="item.price"
+        :minLeaseTerm="item.minLeaseTerm"
+        :isShippingIncluded="item.isShippingIncluded"
+        :tags="item.tags || []"
       ></GoodsCard>
     </div>
   </LayoutCard>
