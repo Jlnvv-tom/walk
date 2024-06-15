@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import LayoutCard from "../../components/layout-card.vue";
 import { rentCoinFormMoneyData } from "../server.ts";
 </script>

@@ -46,10 +46,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
-</script>
-
 <style scoped lang="less">
 .home-top {
   background: url("./img/bg@3x.png");

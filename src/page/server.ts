@@ -44,21 +44,21 @@ export interface MessageList {
 
 const goodsListData: GoodsList[] = [
   {
-    imgUrl: "/src/page/home/img/computer1.png",
+    imgUrl: "/src/page/home/img/phone1.png",
     title: "顶配 iPhone Xs 256GB 大容量",
     price: "6.88/天",
     minLeaseTerm: 30,
     tags: [{ name: "免押金", color: "#00C8BE" }],
   },
   {
-    imgUrl: "/src/page/home/img/computer1.png",
+    imgUrl: "/src/page/home/img/phone2.png",
     title: "顶配 iPhone Xs 256GB 大容量",
     price: "6.88/天",
     minLeaseTerm: 30,
     tags: [{ name: "免押金", color: "#00C8BE" }],
   },
   {
-    imgUrl: "/src/page/home/img/computer1.png",
+    imgUrl: "/src/page/home/img/computer2.png",
     title: "顶配 iPhone Xs 256GB 大容量",
     price: "6.88/天",
     minLeaseTerm: 30,

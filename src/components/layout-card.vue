@@ -1,13 +1,13 @@
 <template>
-  <div class="layout-card-wrapper">
-    <div class="layout-card-header">
+  <div class="layout-card">
+    <div class="layout-card__header">
       <div class="title">
         <div class="title-text">{{ title }}</div>
         <slot v-if="$slots.titleAfter" name="titleAfter" />
       </div>
       <slot v-if="$slots.headerAction" name="headerAction" />
     </div>
-    <div class="layout-card-body">
+    <div class="layout-card__body">
       <slot />
     </div>
   </div>
@@ -27,11 +27,11 @@ const props = withDefaults(
 </script>
 
 <style scoped lang="less">
-.layout-card-wrapper {
+.layout-card {
   height: 100%;
   background: #f7f8f9;
   padding: 16px 0;
-  .layout-card-header {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
