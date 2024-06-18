@@ -68,6 +68,7 @@ const baseUrl = location.origin;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-bottom: 5px;
+    font-size: 16px;
   }
   &__bottom-row1 {
     margin-bottom: 5px;

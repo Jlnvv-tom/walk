@@ -9,14 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
     "better-scroll": "^2.5.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@types/postcss-pxtorem": "^6.0.3",
     "@vitejs/plugin-vue": "^5.0.4",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
+    "postcss": "^8.4.38",
+    "postcss-pxtorem": "^6.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"

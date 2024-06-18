@@ -58,6 +58,7 @@ import { rentCoinFormMoneyData } from "../server.ts";
       flex: 0 0 auto;
       width: 100px;
       box-sizing: border-box;
+      font-size: 16px;
       margin-right: 5px;
       border-radius: 8px;
       &:last-child {
